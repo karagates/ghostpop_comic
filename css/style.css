@@ -1,0 +1,309 @@
+:root {
+  /*color palette*/
+  --panel-border: #000;
+  --pink: #FD7BBA;
+  --pink-shadow: #FC49A0;
+  --ghost: rgb(230,230,230);
+  --ghost-shadow: rgb(200,200,200);
+  --highlight: rgba(255,255,255, 0.3);
+  --darkgray: #444;
+  --wing: rgb(255,255,255);
+  --stick: #f9d6b2;
+  --grass: linear-gradient(to bottom, #1cb03d 0%, #7BFDBE 100%);
+  --sky-light: linear-gradient(to bottom, #b7eaff 0%,#94dfff 100%);
+  --sky-dark: linear-gradient(to bottom, #20202c 0%,#515175 100%);
+  --cloud: white;
+}
+
+h1 {
+  font-family: 'Permanent Marker', cursive;
+}
+
+#container {
+  width: max-content;
+  height: max-content;
+  margin: auto;
+}
+
+.panel {
+  width: 400px;
+  height: 600px;
+  box-shadow: 5px 10px rgba(200,200,200,0.2);
+  border-radius: 8px;
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+  background: var(--sky-light);
+  overflow: hidden;
+}
+    .panel:nth-of-type(1) {
+      background: var(--sky-light);
+    }
+    .panel:last-child {
+      margin-right: 0;
+      background: var(--sky-dark);
+    }
+
+
+/* POPSICLE */
+/* --------------------- */
+
+.pop-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.pop {
+  width: 186px;
+  height: 300px;
+  margin: auto;
+  border-radius: 100px 100px 30px 30px;
+}
+    #melting > .pop {
+      background: var(--pink);
+      box-shadow: 0 30px var(--pink-shadow), -2px 2px inset var(--highlight);
+    }
+    #grave > .pop { /*create variables*/
+      background: var(--ghost-shadow);
+      box-shadow: 0 -20px var(--ghost), -2px 2px inset var(--highlight);
+    }
+    #ghost > .pop {
+      background: var(--ghost);
+      box-shadow: 0 30px var(--ghost-shadow), -2px 2px inset white;
+    }
+
+.stick {
+  width: 40px;
+  height: 120px;
+  margin: 10px auto;
+  border-radius: 0 0 20px 20px;
+
+}
+    #melting > .stick {
+      background: var(--stick);
+      box-shadow: 0 2px inset #d07c57, 0 6px #d07c57;
+    }
+    #ghost > .stick {
+      background: var(--wing);
+      box-shadow: 0 2px inset #bbb, 0 6px #bbb;
+    }
+
+.indent {
+  width: 45px;
+  height: 200px;
+  border-radius: 30px;
+  margin-top: 75px;
+}
+
+    .indent-left {
+      float: left;
+      margin-left: 30px;
+    }
+    .indent-right {
+      float: right;
+      margin-right: 30px;
+    }
+    #melting > .pop > .indent {
+      box-shadow: -6px 6px inset var(--pink-shadow), 2px -2px inset var(--highlight);
+    }
+    #ghost > .pop > .indent {
+      box-shadow: -6px 6px inset var(--ghost-shadow), 2px -2px inset var(--highlight);
+    }
+
+
+/* WINGS */
+/* --------------------- */
+.wing {
+  position: absolute;
+  top: 200px;
+}
+#wing-left{
+  left: 40px;
+  width: 120px;
+  height: 120px;
+}
+
+#wing-right{
+  right: 40px;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
+.wing-joint {
+  width: 30px;
+  height: 70px;
+  box-shadow: -3px -3px #bbb;
+  position: absolute;
+  transform: rotate(104deg);
+  border-radius: 50% / 50%;
+  top: -10px;
+  left: 30px;
+}
+    .feather {
+      background-color: var(--wing);
+      border-radius: 50% / 50%;
+      position: absolute;
+      box-shadow: 3px 3px var(--ghost-shadow);
+    }
+    .top.feather {
+      width: 55px;
+      height: 90px;
+      transform: rotate(80deg);
+      top: -30px;
+    }
+    .mid.feather {
+      width: 45px;
+      height: 70px;
+      left: 16px;
+      transform: rotate(45deg);
+    }
+    .inner.feather {
+      width: 40px;
+      height: 70px;
+      left: 40px;
+      transform: rotate(10deg);
+    }
+
+
+/* EYES */
+/* --------------------- */
+.eye {
+  width: 45px;
+  height: 45px;
+  position: absolute;
+  top: 150px;
+}
+  .left.eye {
+    left: 30px;
+  }
+  .right.eye {
+    right: 30px;
+  }
+  .stem {
+    width: 8px;
+    height: 60px;
+    background-color: var(--darkgray);
+    position: absolute;
+    left: 17px;
+    top: -8px;
+    border-radius: 4px;
+  }
+  .up.stem {
+    transform: rotate(45deg);
+  }
+
+  .down.stem {
+    transform: rotate(-45deg);
+  }
+
+
+/* MOUTH */
+/* --------------------- */
+#mouth {
+  position: absolute;
+  width: 72px;
+  height: 16px;
+  top: 230px;
+  left: 50px;
+  border-radius: 36px / 10px;
+  padding: 1px 7px;
+  background: var(--darkgray);
+}
+#mouth-overlay {
+  position: absolute;
+  width: 86px;
+  height: 20px;
+  top: 233px;
+  left: 50px;
+  border-radius: 42px / 10px;
+  box-shadow: 0 -4px var(--darkgray);
+}
+.tooth {
+  background-color: white;
+  height: 25px;
+  width: 18px;
+  box-shadow: 0 3px var(--ghost-shadow);
+  border-radius: 10px / 15px;
+  float: left;
+}
+
+
+
+/* TOMBSTONE */
+/* --------------------- */
+
+.pop > h1 {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Port Lligat Slab', serif;
+  color: var(--darkgray);
+  font-size: 60px;
+  width: 100%;
+  text-align: center;
+  text-shadow: -1px 2px var(--highlight), 1px -2px #333;
+}
+
+#grass {
+  background: #1cb03d;
+  height: 40%;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+#grass:before {
+  background:
+    linear-gradient(-45deg, #1cb03d 25px, transparent 0),
+    linear-gradient(45deg, #7BFDBE 25px, transparent 0);
+  background-position: left top;
+  background-repeat: repeat-x;
+  background-size: 8px 40px;
+  content: " ";
+  display: block;
+  height: 50px;
+  width: 100%;
+  position: relative;
+  bottom: 10px;
+  left: 0;
+}
+
+#grass-blades{
+  background:
+  linear-gradient(-45deg, #1cb03d 25px, transparent 0),
+  linear-gradient(45deg, #7BFDBE 25px, transparent 0);
+  background-repeat: repeat-x;
+  background-size: 11px 40px;
+  width: 48%;
+  height: 30%;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+/* CLOUDS */
+/* --------------------- */
+
+.cloud {
+  background-color: var(--cloud);
+  height: 40px;
+  width: 100px;
+  border-radius: 100px;
+  box-shadow: 40px 40px var(--cloud), 80px 20px var(--cloud);
+  opacity: .3;
+  position: absolute;
+}
+.cloud:nth-of-type(1) {
+  top: 30px;
+  left: 50px;
+}
+.cloud:nth-of-type(2) {
+  top: 180px;
+  left: 10px;
+}
+.cloud:nth-of-type(3) {
+  top: 100px;
+  right: 20px;
+}
