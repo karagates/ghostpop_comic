@@ -9,15 +9,20 @@
   --darkgray: #444;
   --wing: rgb(255,255,255);
   --stick: #f9d6b2;
-  --grass: linear-gradient(to bottom, #1cb03d 0%, #7BFDBE 100%);
   --sky-light: linear-gradient(to bottom, #b7eaff 0%,#94dfff 100%);
   --sky-dark: linear-gradient(to bottom, #20202c 0%,#515175 100%);
   --cloud: white;
+  --grass-light: #1cb03d;
+  --grass: green;
 }
 
 h1 {
   font-family: 'Permanent Marker', cursive;
+  color: var(--pink);
 }
+
+/* LAYOUT */
+/* --------------------- */
 
 #container {
   width: max-content;
@@ -44,20 +49,18 @@ h1 {
       background: var(--sky-dark);
     }
 
-
 /* POPSICLE */
 /* --------------------- */
 
 .pop-container {
   position: absolute;
-  top: 50%;
+  top: 80px;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%);
 }
 .pop {
   width: 186px;
   height: 300px;
-  margin: auto;
   border-radius: 100px 100px 30px 30px;
 }
     #melting > .pop {
@@ -65,8 +68,12 @@ h1 {
       box-shadow: 0 30px var(--pink-shadow), -2px 2px inset var(--highlight);
     }
     #grave > .pop { /*create variables*/
+      margin-top: 30px;
       background: var(--ghost-shadow);
-      box-shadow: 0 -20px var(--ghost), -2px 2px inset var(--highlight);
+      box-shadow:
+        0 -29px var(--ghost),
+        1px -30px var(--highlight),
+        -2px 2px inset var(--highlight);
     }
     #ghost > .pop {
       background: var(--ghost);
@@ -111,29 +118,180 @@ h1 {
       box-shadow: -6px 6px inset var(--ghost-shadow), 2px -2px inset var(--highlight);
     }
 
+/* MELTING */
+/* --------------------- */
+@keyframes dripping {
+  0% {margin-top: 150px; box-shadow: 0 0 inset white, 0 0 var(--pink-shadow);}
+  100% {margin-top: 500px; box-shadow: 0 2px inset white, 0 2px var(--pink-shadow);}
+}
+.drip {
+  background-color: var(--pink);
+  width: 10px;
+  height: 100px;
+  border-radius: 15px;
+  position: absolute;
+  box-shadow: 0 2px inset white;
+  top: 80px;
+  animation: dripping 2s ease-out infinite;
+  margin-right: 30px;
+}
+    .drip:nth-of-type(1){
+      left: 0;
+      height: 15px;
+      top: 100px;
+    }
+    .drip:nth-of-type(2){
+      left: 15px;
+      top: 50px;
+    }
+    .drip:nth-of-type(3){
+      left: 130px;
+      height: 60px;
+      top: 120px;
+    }
+
+
+/* GRAVE */
+/* --------------------- */
+
+.pop > h1 {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Port Lligat Slab', serif;
+  color: var(--darkgray);
+  font-size: 60px;
+  width: 100%;
+  text-align: center;
+  text-shadow: 0 2px var(--highlight), 0 -2px #20202c;
+}
+
+#grass {
+  background: var(--grass);
+  height: 45%;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+    #grass:before {
+      background:
+        linear-gradient(-45deg, var(--grass) 25px, transparent 0),
+        linear-gradient(45deg, var(--grass-light) 25px, transparent 0);
+      background-position: left top;
+      background-repeat: repeat-x;
+      background-size: 8px 40px;
+      content: " ";
+      display: block;
+      height: 50px;
+      width: 100%;
+      position: relative;
+      bottom: 10px;
+      left: 0;
+    }
+
+    #grass-blades{
+      background:
+      linear-gradient(-45deg, var(--grass) 25px, transparent 0),
+      linear-gradient(45deg, var(--grass-light) 25px, transparent 0);
+      background-repeat: repeat-x;
+      background-size: 11px 40px;
+      width: 48%;
+      height: 37%;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%);
+    }
+
+/* CLOUDS */
+/* --------------------- */
+@keyframes clouds-passing {
+  0%   {margin-left: -510px;}
+  100% {margin-left: 400px;}
+}
+
+.cloud {
+  background-color: var(--cloud);
+  height: 40px;
+  width: 100px;
+  border-radius: 100px;
+  box-shadow: 40px 40px var(--cloud), 80px 20px var(--cloud);
+  opacity: .3;
+  position: absolute;
+  --cloud-animation: clouds-passing 30s linear infinite;
+}
+    .cloud:nth-of-type(1) {
+      top: 30px;
+      left: 100px;
+      animation: var(--cloud-animation);
+    }
+    .cloud:nth-of-type(2) {
+      top: 180px;
+      left: 10px;
+      animation: var(--cloud-animation);
+    }
+    .cloud:nth-of-type(3) {
+      top: 100px;
+      left: 300px;
+      animation: var(--cloud-animation);
+    }
+
+/* GHOST */
+/* --------------------- */
+@keyframes float {
+  0%   {margin-top: 0; opacity: 1;}
+  50%  {margin-top: 5px;}
+  100% {margin-top: -5px; opacity:.8;}
+}
+#ghostpop {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  opacity: 1;
+  animation: float 2s ease-out infinite alternate;
+}
 
 /* WINGS */
 /* --------------------- */
-.wing {
-  position: absolute;
-  top: 200px;
+@keyframes wing-flap-left {
+  0%   {transform: rotate(0deg);}
+  15%  {transform: rotate(5deg);}
+  30%  {transform: rotate(0deg);}
+  50%  {transform: rotate(5deg);}
+  100% {transform: rotate(10deg);}
 }
-#wing-left{
-  left: 40px;
+@keyframes wing-flap-right {
+  0%   {transform: rotate(0deg) scaleX(-1);}
+  15%  {transform: rotate(-5deg) scaleX(-1);}
+  30%  {transform: rotate(0deg) scaleX(-1);}
+  50%  {transform: rotate(-5deg) scaleX(-1);}
+  100% {transform: rotate(-10deg) scaleX(-1);}
+}
+
+.wing {
   width: 120px;
   height: 120px;
+  position: absolute;
+  top: 210px;
+}
+
+#wing-left{
+  left: 40px;
+  transform: rotate(0deg);
+  animation: wing-flap-left 2s ease-in-out infinite alternate;
 }
 
 #wing-right{
   right: 40px;
-  -webkit-transform: scaleX(-1);
-  transform: scaleX(-1);
+  transform: rotate(0deg) scaleX(-1) ;
+  animation: wing-flap-right 2s ease-in-out infinite alternate;
 }
 
 .wing-joint {
   width: 30px;
   height: 70px;
-  box-shadow: -3px -3px #bbb;
+  box-shadow: -3px -3px var(--ghost-shadow);
   position: absolute;
   transform: rotate(104deg);
   border-radius: 50% / 50%;
@@ -165,9 +323,9 @@ h1 {
       transform: rotate(10deg);
     }
 
-
 /* EYES */
 /* --------------------- */
+
 .eye {
   width: 45px;
   height: 45px;
@@ -197,9 +355,9 @@ h1 {
     transform: rotate(-45deg);
   }
 
-
 /* MOUTH */
 /* --------------------- */
+
 #mouth {
   position: absolute;
   width: 72px;
@@ -226,84 +384,4 @@ h1 {
   box-shadow: 0 3px var(--ghost-shadow);
   border-radius: 10px / 15px;
   float: left;
-}
-
-
-
-/* TOMBSTONE */
-/* --------------------- */
-
-.pop > h1 {
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: 'Port Lligat Slab', serif;
-  color: var(--darkgray);
-  font-size: 60px;
-  width: 100%;
-  text-align: center;
-  text-shadow: -1px 2px var(--highlight), 1px -2px #333;
-}
-
-#grass {
-  background: #1cb03d;
-  height: 40%;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-}
-#grass:before {
-  background:
-    linear-gradient(-45deg, #1cb03d 25px, transparent 0),
-    linear-gradient(45deg, #7BFDBE 25px, transparent 0);
-  background-position: left top;
-  background-repeat: repeat-x;
-  background-size: 8px 40px;
-  content: " ";
-  display: block;
-  height: 50px;
-  width: 100%;
-  position: relative;
-  bottom: 10px;
-  left: 0;
-}
-
-#grass-blades{
-  background:
-  linear-gradient(-45deg, #1cb03d 25px, transparent 0),
-  linear-gradient(45deg, #7BFDBE 25px, transparent 0);
-  background-repeat: repeat-x;
-  background-size: 11px 40px;
-  width: 48%;
-  height: 30%;
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translate(-50%);
-}
-
-/* CLOUDS */
-/* --------------------- */
-
-.cloud {
-  background-color: var(--cloud);
-  height: 40px;
-  width: 100px;
-  border-radius: 100px;
-  box-shadow: 40px 40px var(--cloud), 80px 20px var(--cloud);
-  opacity: .3;
-  position: absolute;
-}
-.cloud:nth-of-type(1) {
-  top: 30px;
-  left: 50px;
-}
-.cloud:nth-of-type(2) {
-  top: 180px;
-  left: 10px;
-}
-.cloud:nth-of-type(3) {
-  top: 100px;
-  right: 20px;
 }
